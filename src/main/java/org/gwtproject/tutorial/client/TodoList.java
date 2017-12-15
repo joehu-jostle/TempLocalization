@@ -13,6 +13,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -49,11 +50,17 @@ public class TodoList implements EntryPoint {
     // We can add style names to widgets
     sendButton.addStyleName("sendButton");
 
+    final ListBox listBox = new ListBox();
+    for (Language language : Language.values()) {
+      listBox.addItem(language.name());
+    }
+
     // Add the nameField and sendButton to the RootPanel
     // Use RootPanel.get() to get the entire body element
     RootPanel.get("nameFieldContainer").add(nameField);
     RootPanel.get("sendButtonContainer").add(sendButton);
     RootPanel.get("errorLabelContainer").add(errorLabel);
+    RootPanel.get("languageContainer").add(listBox);
 
     // Focus the cursor on the name field when the app loads
     nameField.setFocus(true);
