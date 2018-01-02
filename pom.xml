@@ -58,7 +58,41 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
+
+      <dependency>
+          <groupId>com.jostle.fakelang</groupId>
+          <artifactId>fake-language-generator-test</artifactId>
+          <version>1</version>
+      </dependency>
   </dependencies>
+
+  <profiles>
+    <profile>
+      <id>add-fake-language</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>1.6.0</version>
+            <executions>
+              <execution>
+                <id>generate-fake-language</id>
+                <goals>
+                  <goal>java</goal>
+                </goals>
+                <phase>process-resources</phase>
+                <configuration>
+                  <mainClass>FakeLanguageFileGenerator</mainClass>
+                  <!--<classpathScope>test</classpathScope>-->
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
   <build>
     <!-- Output classes directly into the webapp, so that IDEs and "mvn process-classes" update them in DevMode -->
@@ -113,4 +147,12 @@
 
     </plugins>
   </build>
+
+    <repositories>
+        <repository>
+            <id>thirdparty</id>
+            <name>Nexus thirdparty</name>
+            <url>http://nexus.jostle.us:8081/nexus/content/repositories/thirdparty</url>
+        </repository>
+    </repositories>
 </project>
