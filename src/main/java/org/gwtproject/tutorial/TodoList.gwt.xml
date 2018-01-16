@@ -22,6 +22,7 @@
   <!-- Specify the app entry point class.                         -->
   <entry-point class='org.gwtproject.tutorial.client.TodoList'/>
   <extend-property name="locale" values="es"/>
+	<extend-property name="locale" values="pl"/>
 
   <!-- Specify the paths for translatable code                    -->
   <source path='client'/>

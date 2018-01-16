@@ -64,6 +64,12 @@
           <artifactId>fake-language-generator-test</artifactId>
           <version>1</version>
       </dependency>
+
+    <dependency>
+      <groupId>com.google.cloud</groupId>
+      <artifactId>google-cloud-translate</artifactId>
+      <version>1.14.0</version>
+    </dependency>
   </dependencies>
 
   <profiles>
@@ -84,7 +90,7 @@
                 <phase>process-resources</phase>
                 <configuration>
                   <mainClass>FakeLanguageFileGenerator</mainClass>
-                  <!--<classpathScope>test</classpathScope>-->
+                  <classpathScope>test</classpathScope>
                 </configuration>
               </execution>
             </executions>
