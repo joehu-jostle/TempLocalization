@@ -8,6 +8,11 @@ import com.google.cloud.translate.TranslateOptions;
 import com.google.cloud.translate.Translation;
 
 
+
+
+
+
+
 public class TranslateText {
     /**
      * Translates the source text in any language to English.
