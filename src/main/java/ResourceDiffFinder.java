@@ -1,5 +1,3 @@
-package com.example.cloud.translate.samples.localization;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -20,8 +18,8 @@ public class ResourceDiffFinder {
     private static String pathFromRootToProject = new File("").getAbsolutePath();
     private static Logger logger = Logger.getLogger(ResourceDiffFinder.class.getName());
 
-    private static final String ENGLISH_FILE_PATH = "/src/main/java/com/example/cloud/translate/samples/localization/RichClientStrings.properties";
-    private static final String FRENCH_FILE_PATH = "/src/main/java/com/example/cloud/translate/samples/localization/RichClientStrings_fr.properties";
+    private static final String ENGLISH_FILE_PATH = "/src/main/java/com/jostleme/jostle/ui/localization/RichClientStrings.properties";
+    private static final String FRENCH_FILE_PATH = "/src/main/java/com/jostleme/jostle/ui/localization/RichClientStrings_fr.properties";
 
     public static void findResourceDiff() {
         loadStrings(ENGLISH_FILE_PATH);

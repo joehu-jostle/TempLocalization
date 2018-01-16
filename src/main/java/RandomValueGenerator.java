@@ -1,5 +1,3 @@
-package com.example.cloud.translate.samples;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -17,7 +15,7 @@ public class RandomValueGenerator {
     private static String pathFromRootToProject = new File("").getAbsolutePath();
     private static Logger logger = Logger.getLogger(RandomValueGenerator.class.getName());
 
-    private static final String STRING_FILE_PATH = "/src/main/java/com/example/cloud/translate/samples/localization/RichClientStrings.properties";
+    private static final String STRING_FILE_PATH = "/src/main/java/com/jostleme/jostle/ui/localization/RichClientStrings.properties";
     private static final String BASE_STRING = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ne.";
 
     public static void main(String args[]) {
@@ -117,6 +115,6 @@ public class RandomValueGenerator {
     }
 
     public static void write() {
-        write(stringBuilder.toString(), pathFromRootToProject+"/src/main/java/com/example/cloud/translate/samples/localization/RichClientStrings_it.properties");
+        write(stringBuilder.toString(), pathFromRootToProject+"/src/main/java/com/jostleme/jostle/ui/localization/RichClientStrings_it.properties");
     }
 }

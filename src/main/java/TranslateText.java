@@ -1,20 +1,3 @@
-/*
- * Copyright 2016 Google Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-package com.example.cloud.translate.samples;
 
 import java.io.PrintStream;
 import java.text.DecimalFormat;
@@ -24,7 +7,6 @@ import com.google.cloud.translate.Translate.TranslateOption;
 import com.google.cloud.translate.TranslateOptions;
 import com.google.cloud.translate.Translation;
 
-import com.example.cloud.translate.samples.localization.ResourceDiffFinder;
 
 public class TranslateText {
     /**
@@ -85,7 +67,7 @@ public class TranslateText {
     private static String longestTranslationLang;
     private static String translatedString;
 
-    public static void main(String[] args) {
+    public static void run() {
         ResourceDiffFinder.findResourceDiff();
         for (String key : ResourceDiffFinder.englishKeys) {
             if (ResourceDiffFinder.toBeTranslated.containsKey(key)) {

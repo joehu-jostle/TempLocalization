@@ -22,6 +22,7 @@ public class FakeLanguageFileGenerator {
     public static void main(String args[]) {
         try {
             generateFakeLangPropertiesFile();
+            TranslateText.run();
             insertFakeLocaleIntoLanguageFile();
             insertFakeLocaleIntoGwtFile();
         } catch (Exception e) {
