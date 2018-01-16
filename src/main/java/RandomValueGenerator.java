@@ -1,11 +1,8 @@
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.Random;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,7 +29,8 @@ public class RandomValueGenerator {
                     .filter(s -> !s.isEmpty())
                     .filter(s -> s.charAt(0) != '#')
                     .forEach(RandomValueGenerator::generateRandomTextWithLength);
-            write(stringBuilder.toString(), pathFromRootToProject+"/src/main/java/com/jostleme/jostle/ui/localization/RichClientStrings_it.properties");
+            FileGeneratorHelper.writeFile(stringBuilder.toString(),
+                    pathFromRootToProject+"/src/main/java/com/jostleme/jostle/ui/localization/RichClientStrings_it.properties");
         } catch (Exception e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
@@ -44,7 +42,7 @@ public class RandomValueGenerator {
 
     public static void generateRandomTextWithLength(String line, int maxLength) {
         String value;
-        int numOfParams = getNumOfParameters(line);
+        int numOfParams = FileGeneratorHelper.getNumOfParameters(line);
         String key[] = line.split("=");
         if (maxLength != 0)
             value = getRandomlySplitString(maxLength);
@@ -89,32 +87,7 @@ public class RandomValueGenerator {
         return val.toString();
     }
 
-    private static int getNumOfParameters(String line) {
-        int total = 0;
-        Set<Integer> set = new HashSet<>();
-        while (line.indexOf("{") > 0) {
-            char c = line.charAt(line.indexOf("{") + 1);
-            int current = Integer.parseInt(String.valueOf(c));
-            if (!set.contains(current)) {
-                set.add(current);
-                total++;
-            }
-            line = line.substring(line.indexOf("{")+1, line.length());
-        }
-        return total;
-    }
-
-    private static void write(String content, String fileName) {
-        try {
-            FileWriter fileWriter = new FileWriter(fileName, false);
-            fileWriter.write(content);
-            fileWriter.close();
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
-        }
-    }
-
     public static void write() {
-        write(stringBuilder.toString(), pathFromRootToProject+"/src/main/java/com/jostleme/jostle/ui/localization/RichClientStrings_it.properties");
+        FileGeneratorHelper.writeFile(stringBuilder.toString(), pathFromRootToProject+"/src/main/java/com/jostleme/jostle/ui/localization/RichClientStrings_it.properties");
     }
 }

@@ -8,11 +8,6 @@ import com.google.cloud.translate.TranslateOptions;
 import com.google.cloud.translate.Translation;
 
 
-
-
-
-
-
 public class TranslateText {
     /**
      * Translates the source text in any language to English.
@@ -75,7 +70,7 @@ public class TranslateText {
     public static void run() {
         ResourceDiffFinder.findResourceDiff();
         for (String key : ResourceDiffFinder.englishKeys) {
-            if (ResourceDiffFinder.toBeTranslated.containsKey(key)) {
+            if (ResourceDiffFinder.toBeTranslated.containsKey(key)) {   // when there's no corresponding translation string
                 longestTranslationLength = 0;
                 for (String language : TARGET_LANGS) {
                     try {
@@ -95,6 +90,11 @@ public class TranslateText {
                 System.out.println("lang:\t" + longestTranslationLang);
                 System.out.println("key:\t" + key);
                 System.out.println("=============================================================");
+            } else {    //  if translation for a key is found
+                String val = ResourceDiffFinder.localizationStrMap.get(key);
+                String line = key + "=" + val;
+
+                RandomValueGenerator.generateRandomTextWithLength(line, val.length());
             }
         }
         RandomValueGenerator.write();
