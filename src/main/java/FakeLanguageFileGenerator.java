@@ -57,37 +57,37 @@ public class FakeLanguageFileGenerator {
         Path path = Paths.get(pathFromRootToProject +"/src/main/java/com/jostleme/jostle/common/domain/Language.java");
         List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
         String target = "GERMAN";
-        stringBuilder = new StringBuilder();
-
-        for (String line : lines) {
-            if (line.contains(target)) {
-                line = "";
-                stringBuilder.append("\tPOLISH(\"pl\"),");
-                stringBuilder.append("\n\tITALIAN(\"it\"),");
-            }
-            stringBuilder.append(line+"\n");
-        }
+        String polishInsertion = "POLISH(\"pl\"),";
+        String italianInsertion = "ITALIAN(\"it\"),";
+        insertFakeLanguageInfo(lines, target, polishInsertion, italianInsertion);
         FileGeneratorHelper.writeFile(stringBuilder.toString(), path.toString());
+    }
+
+    private static String addTabAndNewLine(String str) {
+        return "\t" + str + "\n";
     }
 
     private static void insertFakeLocaleIntoGwtFile() throws IOException {
         Path path = Paths.get(pathFromRootToProject +"/src/main/java/com/jostleme/jostle/RichClient.gwt.xml");
         List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
-        String target = "values=\"ja\"";
+        String target = "values=\"de\"";
+        String polishInsertion = "<extend-property name=\"locale\" values=\"pl\"/>";
+        String italianInsertion = "<extend-property name=\"locale\" values=\"it\"/>";
+        insertFakeLanguageInfo(lines, target, polishInsertion, italianInsertion);
+        FileGeneratorHelper.writeFile(stringBuilder.toString(), path.toString());
+    }
+
+    private static void insertFakeLanguageInfo(List<String> lines, String target, String firstInsertion, String secondInsertion) {
         stringBuilder = new StringBuilder();
-        boolean flag = false;
-
+        boolean hasFakeLanguageAlreadyAdded = false;
         for (String line : lines) {
-            if (flag) {
-                stringBuilder.append("\t<extend-property name=\"locale\" values=\"pl\"/>\n");
-                stringBuilder.append("\t<extend-property name=\"locale\" values=\"it\"/>\n");
-                flag = false;
+            if (line.contains(firstInsertion) || line.contains(secondInsertion))
+                hasFakeLanguageAlreadyAdded = true;
+            if (line.contains(target) && !hasFakeLanguageAlreadyAdded) {
+                stringBuilder.append(addTabAndNewLine(firstInsertion));
+                stringBuilder.append(addTabAndNewLine(secondInsertion));
             }
-
-            if (line.contains(target))
-                flag = true;
             stringBuilder.append(line+"\n");
         }
-        FileGeneratorHelper.writeFile(stringBuilder.toString(), path.toString());
     }
 }
