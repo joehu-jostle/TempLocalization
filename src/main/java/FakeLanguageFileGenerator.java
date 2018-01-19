@@ -57,8 +57,8 @@ public class FakeLanguageFileGenerator {
         Path path = Paths.get(pathFromRootToProject +"/src/main/java/com/jostleme/jostle/common/domain/Language.java");
         List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
         String target = "GERMAN";
-        String polishInsertion = "POLISH(\"pl\"),";
-        String italianInsertion = "ITALIAN(\"it\"),";
+        String polishInsertion = "POLISH(\"pl\", \"d MMMM\"),";
+        String italianInsertion = "ITALIAN(\"it\", \"d MMMM\"),";
         insertFakeLanguageInfo(lines, target, polishInsertion, italianInsertion);
         FileGeneratorHelper.writeFile(stringBuilder.toString(), path.toString());
     }
