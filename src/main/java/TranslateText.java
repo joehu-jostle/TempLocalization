@@ -78,6 +78,11 @@ public class TranslateText {
                     } catch (ArrayIndexOutOfBoundsException ex) {
                         System.out.println("FAIL");
                         TranslateText.translateText(ResourceDiffFinder.toBeTranslated.get(key), System.out);
+                    } catch (Exception e) {
+                        System.out.println("To be translated: " + ResourceDiffFinder.toBeTranslated.get(key));
+                        System.out.println("base lang: " + BASE_LANG);
+                        System.out.println("new lang: " + language);
+                        e.printStackTrace();
                     }
                 }
                 String line = key + "=" + translatedString;
