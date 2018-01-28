@@ -41,8 +41,9 @@ public class ResourceDiffFinder {
                     .filter(s -> !s.isEmpty())
                     .filter(s -> s.charAt(0) != '#')
                     .forEach(s -> {
-                        String key = s.split("=")[0];
-                        String val = s.split("=")[1];
+                        int indexOfFirstEqualSign = s.indexOf("=");
+                        String key = s.substring(0, indexOfFirstEqualSign);
+                        String val = s.substring(indexOfFirstEqualSign + 1, s.length());
                         if (filePath.equals(ENGLISH_FILE_PATH)) {
                             englishMap.put(key, val);
                             englishKeys.add(key);
