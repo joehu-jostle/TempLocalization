@@ -4,9 +4,6 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.stream.Stream;
 
 public class ResourceDiffFinder {
 
@@ -15,17 +12,19 @@ public class ResourceDiffFinder {
     public static Map<String, String> localizationStrMap = new HashMap<>();
     public static Map<String, String> toBeTranslated = new HashMap<>();
 
-    private static String pathFromRootToProject = new File("").getAbsolutePath();
-    private static Logger logger = Logger.getLogger(ResourceDiffFinder.class.getName());
+    private static final String pathFromRootToProject = new File("").getAbsolutePath();
 
     private static final String ENGLISH_FILE_PATH = "/src/main/java/com/jostleme/jostle/ui/localization/RichClientStrings.properties";
-    private static final String FRENCH_FILE_PATH = "/src/main/java/com/jostleme/jostle/ui/localization/RichClientStrings_fr.properties";
+    private static final String FRENCH_FILE_PATH =  "/src/main/java/com/jostleme/jostle/ui/localization/RichClientStrings_fr.properties";
+
+    private static final String ITALIAN_FILE_PATH = "/src/main/java/com/jostleme/jostle/ui/localization/RichClientStrings_it.properties";
 
     public static void findResourceDiff() {
         loadStrings(ENGLISH_FILE_PATH);
-        loadStrings(FRENCH_FILE_PATH);
+        loadStrings(ITALIAN_FILE_PATH);
+
         System.out.println("eng: " + englishKeys.size());
-        System.out.println("fr: " + localizationStrMap.size());
+        System.out.println("it: " + localizationStrMap.size());
 
         for (String key : englishKeys) {
             if (!localizationStrMap.containsKey(key)) {
@@ -43,7 +42,8 @@ public class ResourceDiffFinder {
                     .forEach(s -> {
                         int indexOfFirstEqualSign = s.indexOf("=");
                         String key = s.substring(0, indexOfFirstEqualSign);
-                        String val = s.substring(indexOfFirstEqualSign + 1, s.length());
+                        indexOfFirstEqualSign++;
+                        String val = s.substring(indexOfFirstEqualSign, s.length());
                         if (filePath.equals(ENGLISH_FILE_PATH)) {
                             englishMap.put(key, val);
                             englishKeys.add(key);
@@ -51,8 +51,12 @@ public class ResourceDiffFinder {
                             localizationStrMap.put(key, val);
                         }
                     });
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
+        } catch (Exception e) { // if there's no already translated data
+            if (filePath.equals(ITALIAN_FILE_PATH)) {
+                System.out.println("Existing translation file not found.");
+                System.out.println("Will find diffs between English and French");
+                loadStrings(FRENCH_FILE_PATH);
+            }
         }
     }
 }

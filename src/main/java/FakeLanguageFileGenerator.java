@@ -29,14 +29,16 @@ public class FakeLanguageFileGenerator {
 
     private static void generateFakeLangPropertiesFile() throws IOException {
         String filePath = "/src/main/java/com/jostleme/jostle/ui/localization/RichClientStrings.properties";
+        String pathOfFileToGenerate = "/src/main/java/com/jostleme/jostle/ui/localization/RichClientStrings_pl.properties";
 
         try (BufferedReader br = new BufferedReader(new FileReader(pathFromRootToProject +filePath))) {
             br.lines()
                     .filter(s -> !s.isEmpty())
                     .filter(s -> s.charAt(0) != '#')
                     .forEach(FakeLanguageFileGenerator::splitter);
+
             FileGeneratorHelper.writeFile(stringBuilder.toString(),
-                    pathFromRootToProject+"/src/main/java/com/jostleme/jostle/ui/localization/RichClientStrings_pl.properties");
+                    pathFromRootToProject + pathOfFileToGenerate);
         } catch (Exception e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }

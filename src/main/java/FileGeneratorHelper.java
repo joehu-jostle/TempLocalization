@@ -6,7 +6,7 @@ import java.util.logging.Logger;
 
 public class FileGeneratorHelper {
 
-    private static Logger logger = Logger.getLogger(FileGeneratorHelper.class.getName());
+    private static final Logger logger = Logger.getLogger(FileGeneratorHelper.class.getName());
 
     public static void writeFile(String content, String fileName) {
         try {
