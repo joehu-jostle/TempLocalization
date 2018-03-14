@@ -4,11 +4,11 @@
 
   <!-- POM file generated with GWT webAppCreator -->
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.gwtproject.tutorial</groupId>
-  <artifactId>TodoList</artifactId>
-  <packaging>war</packaging>
-  <version>1.0-SNAPSHOT</version>
-  <name>org.gwtproject.tutorial.TodoList</name>
+  <groupId>com.jostle.fakelang</groupId>
+  <artifactId>fake-language-generator</artifactId>
+  <packaging>jar</packaging>
+  <version>5</version>
+  <name>com.jostle.fakelang.fakeLanguageGenerator</name>
 
   <properties>
 
@@ -107,50 +107,6 @@
 
     <plugins>
 
-      <!-- GWT Maven Plugin-->
-      <plugin>
-        <groupId>net.ltgt.gwt.maven</groupId>
-        <artifactId>gwt-maven-plugin</artifactId>
-        <version>1.0-rc-8</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>compile</goal>
-              <goal>test</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <moduleName>org.gwtproject.tutorial.TodoList</moduleName>
-          <moduleShortName>TodoList</moduleShortName>
-          <failOnError>true</failOnError>
-          <!-- GWT compiler 2.8 requires 1.8, hence define sourceLevel here if you use
-               a different source language for java compilation -->
-          <sourceLevel>1.8</sourceLevel>
-          <!-- Compiler configuration -->
-          <compilerArgs>
-            <!-- Ask GWT to create the Story of Your Compile (SOYC) (gwt:compile) -->
-            <arg>-compileReport</arg>
-            <arg>-XcompilerMetrics</arg>
-          </compilerArgs>
-          <!-- DevMode configuration -->
-          <warDir>${project.build.directory}/${project.build.finalName}</warDir>
-          <classpathScope>compile+runtime</classpathScope>
-          <!-- URL(s) that should be opened by DevMode (gwt:devmode). -->
-          <startupUrls>
-            <startupUrl>TodoList.html</startupUrl>
-          </startupUrls>
-        </configuration>
-      </plugin>
-
-      <!-- Skip normal test execution, we use gwt:test instead -->
-      <plugin>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.17</version>
-        <configuration>
-          <skip>true</skip>
-        </configuration>
-      </plugin>
 
     </plugins>
   </build>
