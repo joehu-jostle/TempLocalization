@@ -29,7 +29,7 @@ public class FakeLanguageFileGenerator {
 
     private static void generateFakeLangPropertiesFile() throws IOException {
         String filePath = "/src/main/java/com/jostleme/jostle/ui/localization/RichClientStrings.properties";
-        String pathOfFileToGenerate = "/src/main/java/com/jostleme/jostle/ui/localization/RichClientStrings_pl.properties";
+        String pathOfFileToGenerate = "/src/main/java/com/jostleme/jostle/ui/localization/RichClientStrings_lv.properties";
 
         try (BufferedReader br = new BufferedReader(new FileReader(pathFromRootToProject +filePath))) {
             br.lines()
@@ -59,9 +59,9 @@ public class FakeLanguageFileGenerator {
         Path path = Paths.get(pathFromRootToProject +"/src/main/java/com/jostleme/jostle/common/domain/Language.java");
         List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
         String target = "GERMAN";
-        String polishInsertion = "POLISH(\"pl\", \"d MMMM\"),";
+        String latvianInsertion = "LATVIAN(\"lv\", \"d MMMM\"),";
         String italianInsertion = "ITALIAN(\"it\", \"d MMMM\"),";
-        insertFakeLanguageInfo(lines, target, polishInsertion, italianInsertion);
+        insertFakeLanguageInfo(lines, target, latvianInsertion, italianInsertion);
         FileGeneratorHelper.writeFile(stringBuilder.toString(), path.toString());
     }
 
@@ -73,9 +73,9 @@ public class FakeLanguageFileGenerator {
         Path path = Paths.get(pathFromRootToProject +"/src/main/java/com/jostleme/jostle/RichClient.gwt.xml");
         List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
         String target = "values=\"de\"";
-        String polishInsertion = "<extend-property name=\"locale\" values=\"pl\"/>";
+        String latvianInsertion = "<extend-property name=\"locale\" values=\"lv\"/>";
         String italianInsertion = "<extend-property name=\"locale\" values=\"it\"/>";
-        insertFakeLanguageInfo(lines, target, polishInsertion, italianInsertion);
+        insertFakeLanguageInfo(lines, target, latvianInsertion, italianInsertion);
         FileGeneratorHelper.writeFile(stringBuilder.toString(), path.toString());
     }
 
